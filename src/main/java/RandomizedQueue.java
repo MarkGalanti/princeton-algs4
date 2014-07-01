@@ -11,23 +11,25 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         private int size;
 
-        public RandIterator(Object[] _arr, int _size) {
-            randIndex = new int[_size];
-            for (int i = 0; i < _size; i++) {
+        public RandIterator(Object[] arr, int size) {
+            randIndex = new int[size];
+            for (int i = 0; i < size; i++) {
                 randIndex[i] = i;
             }
             StdRandom.shuffle(randIndex);
             count = 0;
-            size = _size;
-            arr = _arr;
+            this.size = size;
+            this.arr = arr;
         }
 
         public boolean hasNext() {
             return count < size;
         }
 
-        @SuppressWarnings("unchecked")
         public Item next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             Item r = (Item) arr[randIndex[count]];
             count++;
             return r;
@@ -43,7 +45,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int sz;
 
     public RandomizedQueue() {
-        arr = new Object[32];
+        arr = new Object[8];
         sz = 0;
     }
 
@@ -62,7 +64,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (sz == arr.length) {
             Object[] old = arr;
             arr = new Object[old.length * 2];
-            for (int i = 0; i < old.length; i++) {
+            for (int i = 0; i < sz; i++) {
                 arr[i] = old[i];
             }
         }
@@ -70,7 +72,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         arr[sz++] = item;
     }
 
-    @SuppressWarnings("unchecked")
     public Item dequeue() {
         if (isEmpty()) {
             throw new NoSuchElementException();
@@ -81,10 +82,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         arr[idx] = arr[sz - 1];
         sz--;
 
+        if (sz >= 8 && sz <= arr.length / 2) {
+            Object[] old = arr;
+            arr = new Object[old.length / 2];
+            for (int i = 0; i < sz; i++) {
+                arr[i] = old[i];
+            }
+        }
+
         return r;
     }
 
-    @SuppressWarnings("unchecked")
     public Item sample() {
         if (isEmpty()) {
             throw new NoSuchElementException();
@@ -95,7 +103,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Iterator<Item> iterator() {
         return new RandIterator(arr, sz);
     }
-    
+
     public static void main(String[] args) {
         RandomizedQueue<Integer> randQueue = new RandomizedQueue<Integer>();
         randQueue.enqueue(1);
@@ -103,19 +111,27 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         randQueue.enqueue(3);
         randQueue.enqueue(4);
         randQueue.enqueue(5);
-        
-        StdOut.println("5 items");
-        for (Integer i : randQueue) {
+        randQueue.enqueue(6);
+        randQueue.enqueue(7);
+        randQueue.enqueue(8);
+        randQueue.enqueue(9);
+        randQueue.enqueue(10);
+
+        StdOut.println("10 items");
+        for (int i : randQueue) {
             StdOut.println(i);
         }
-        
-        randQueue.dequeue();
-        randQueue.dequeue();
-        
-        StdOut.println("3 items");
-        for (Integer i : randQueue) {
+
+        StdOut.println("del:" + randQueue.dequeue());
+        StdOut.println("del:" + randQueue.dequeue());
+        StdOut.println("del:" + randQueue.dequeue());
+        StdOut.println("del:" + randQueue.dequeue());
+        StdOut.println("del:" + randQueue.dequeue());
+
+        StdOut.println("5 items");
+        for (int i : randQueue) {
             StdOut.println(i);
         }
     }
-    
+
 }

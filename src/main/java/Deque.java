@@ -9,46 +9,26 @@ public class Deque<Item> implements Iterable<Item> {
         private Node<Item> prev;
         private Node<Item> next;
 
-        public Node(Item _value, Node<Item> _prev, Node<Item> _next) {
-            value = _value;
-            prev = _prev;
-            next = _next;
+        public Node(Item value, Node<Item> prev, Node<Item> next) {
+            this.value = value;
+            this.prev = prev;
+            this.next = next;
         }
 
-        public Node(Item _value) {
-            this(_value, null, null);
+        public Node(Item value) {
+            this(value, null, null);
         }
 
         public Item getValue() {
             return value;
         }
-
-        public void setValue(Item _value) {
-            value = _value;
-        }
-
-        public Node<Item> getPrev() {
-            return prev;
-        }
-
-        public void setPrev(Node<Item> _prev) {
-            prev = _prev;
-        }
-
-        public Node<Item> getNext() {
-            return next;
-        }
-
-        public void setNext(Node<Item> _next) {
-            next = _next;
-        }
     }
 
-    private class dequeIterator implements Iterator<Item> {
+    private class DequeIterator implements Iterator<Item> {
         private Node<Item> current;
 
-        public dequeIterator(Node<Item> _current) {
-            current = _current;
+        public DequeIterator(Node<Item> current) {
+            this.current = current;
         }
 
         public boolean hasNext() {
@@ -76,7 +56,8 @@ public class Deque<Item> implements Iterable<Item> {
     private int sz;
 
     public Deque() {
-        head = tail = null;
+        head = null;
+        tail = null;
         sz = 0;
     }
 
@@ -93,7 +74,8 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NullPointerException();
         }
         if (isEmpty()) {
-            head = tail = new Node<Item>(item);
+            head = new Node<Item>(item);
+            tail = head;
         } else {
             Node<Item> newNode = new Node<Item>(item, null, head);
             head.prev = newNode;
@@ -107,7 +89,8 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NullPointerException();
         }
         if (isEmpty()) {
-            head = tail = new Node<Item>(item);
+            head = new Node<Item>(item);
+            tail = head;
         } else {
             Node<Item> newNode = new Node<Item>(item, tail, null);
             tail.next = newNode;
@@ -122,7 +105,8 @@ public class Deque<Item> implements Iterable<Item> {
         }
         Item r = head.getValue();
         if (sz == 1) {
-            head = tail = null;
+            head = null;
+            tail = null;
         } else {
             head = head.next;
             head.prev = null;
@@ -138,7 +122,8 @@ public class Deque<Item> implements Iterable<Item> {
         }
         Item r = tail.getValue();
         if (sz == 1) {
-            head = tail = null;
+            head = null;
+            tail = null;
         } else {
             tail = tail.prev;
             tail.next = null;
@@ -149,7 +134,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Iterator<Item> iterator() {
-        return new dequeIterator(head);
+        return new DequeIterator(head);
     }
 
     public static void main(String[] args) {
@@ -166,7 +151,7 @@ public class Deque<Item> implements Iterable<Item> {
         deque.addLast(10);
 
         StdOut.println("1 to 10");
-        for (Integer i : deque) {
+        for (int i : deque) {
             StdOut.println(i);
         }
 
@@ -176,7 +161,7 @@ public class Deque<Item> implements Iterable<Item> {
         deque.removeLast();
 
         StdOut.println("3 to 8");
-        for (Integer i : deque) {
+        for (int i : deque) {
             StdOut.println(i);
         }
     }
