@@ -61,7 +61,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (item == null) {
             throw new NullPointerException();
         }
-        if (sz == arr.length) {
+        if (sz >= arr.length / 4 * 3) {
             Object[] old = arr;
             arr = new Object[old.length * 2];
             for (int i = 0; i < sz; i++) {
@@ -80,9 +80,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         Item r = (Item) arr[idx];
         arr[idx] = arr[sz - 1];
+        arr[sz - 1] = null;
         sz--;
 
-        if (sz >= 8 && sz <= arr.length / 2) {
+        if (sz >= 8 && sz <= arr.length / 4) {
             Object[] old = arr;
             arr = new Object[old.length / 2];
             for (int i = 0; i < sz; i++) {
