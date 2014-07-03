@@ -105,34 +105,4 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return new RandIterator(arr, sz);
     }
 
-    public static void main(String[] args) {
-        RandomizedQueue<Integer> randQueue = new RandomizedQueue<Integer>();
-        randQueue.enqueue(1);
-        randQueue.enqueue(2);
-        randQueue.enqueue(3);
-        randQueue.enqueue(4);
-        randQueue.enqueue(5);
-        randQueue.enqueue(6);
-        randQueue.enqueue(7);
-        randQueue.enqueue(8);
-        randQueue.enqueue(9);
-        randQueue.enqueue(10);
-
-        StdOut.println("10 items");
-        for (int i : randQueue) {
-            StdOut.println(i);
-        }
-
-        StdOut.println("del:" + randQueue.dequeue());
-        StdOut.println("del:" + randQueue.dequeue());
-        StdOut.println("del:" + randQueue.dequeue());
-        StdOut.println("del:" + randQueue.dequeue());
-        StdOut.println("del:" + randQueue.dequeue());
-
-        StdOut.println("5 items");
-        for (int i : randQueue) {
-            StdOut.println(i);
-        }
-    }
-
 }
