@@ -1,5 +1,5 @@
 /**************************************************
- * Cousera - Algorithms, Part I Princetion University link:
+ * Coursera - Algorithms, Part I Princetion University
  * https://class.coursera.org/algs4partI-005
  * 
  * Programming Assignment 1: Percolation
