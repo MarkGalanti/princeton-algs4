@@ -9,9 +9,9 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class PointSET {
-    Set<Point2D> st;
+    private Set<Point2D> st;
 
-    // construct an empty set of points
+    // construct an empty set of pointsk
     public PointSET() {
         st = new TreeSet<Point2D>();
     }
