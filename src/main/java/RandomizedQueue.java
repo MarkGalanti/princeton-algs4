@@ -42,6 +42,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             return count < size;
         }
 
+        @SuppressWarnings("unchecked")
         public Item next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -116,6 +117,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      *
      * @return 出队元素
      */
+    @SuppressWarnings("unchecked")
     public Item dequeue() {
         if (isEmpty()) {
             throw new NoSuchElementException();
@@ -145,6 +147,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      *
      * @return 随机元素
      */
+    @SuppressWarnings("unchecked")
     public Item sample() {
         if (isEmpty()) {
             throw new NoSuchElementException();

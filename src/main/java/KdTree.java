@@ -1,12 +1,12 @@
-import java.util.ArrayList;
-import java.util.List;
-
 /**************************************************
  * Coursera - Algorithms, Part I Princetion University
  * https://class.coursera.org/algs4partI-005
  * 
  * Programming Assignment 5: Kd-Trees
  **************************************************/
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class KdTree {
     private static class Node {

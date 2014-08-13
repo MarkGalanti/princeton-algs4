@@ -18,3 +18,7 @@ hs_err_pid*
 .settings
 bin
 /target
+
+# intellij idea
+*.iml
+.idea/
